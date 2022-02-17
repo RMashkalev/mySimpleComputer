@@ -1,4 +1,4 @@
-OFLAGS=g++ -Wall -o
+OFLAGS=g++ -Wall -c -o
 BINFLAGS=g++ -Wall -o
 
 all: bin/sc
@@ -12,4 +12,4 @@ obj/terminal.o: src/terminal.cpp
 	$(OFLAGS) $@ $^
 
 clean:
-		rm sc 
+		rm bin/sc obj/*.o
