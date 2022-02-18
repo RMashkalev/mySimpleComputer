@@ -1,6 +1,7 @@
 #pragma once
 
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define P 0x01 // Переполнение
 #define O 0x02 // Деление на 0
@@ -8,8 +9,6 @@
 #define T 0x08 // Игнорирование тактовых импульсов
 #define E 0x10 // Неверная команда
 #define H 0x20 // Другое
-
-using namespace std;
 
 int sc_memoryInit ();
 

@@ -1,14 +1,14 @@
-OFLAGS=g++ -Wall -c -o
-BINFLAGS=g++ -Wall -o
+OFLAGS=gcc -Wall -c -o
+BINFLAGS=gcc -Wall -o
 
 all: bin/sc
 bin/sc: obj/main.o obj/memory.o obj/terminal.o
 	$(BINFLAGS) $@ $^
-obj/main.o: src/main.cpp
+obj/main.o: src/main.c
 	$(OFLAGS) $@ $^
-obj/memory.o: src/memory.cpp
+obj/memory.o: src/memory.c
 	$(OFLAGS) $@ $^
-obj/terminal.o: src/terminal.cpp
+obj/terminal.o: src/terminal.c
 	$(OFLAGS) $@ $^
 
 clean:

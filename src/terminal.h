@@ -1,6 +1,8 @@
 #pragma once
 
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+//#include <sys/ioctl.h>
 
 enum colors {
 	black = 0,
@@ -12,8 +14,6 @@ enum colors {
 	cyan = 6,
 	white = 7
 };
-
-using namespace std;
 
 int mt_clrscr();
 

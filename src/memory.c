@@ -1,14 +1,14 @@
-#include "memory.hpp"
+#include "memory.h"
 
 static int *sc_ram = NULL;
-int err_flag = 0;
+int err_flags = 0;
 
 int sc_memoryInit()
 {
     if(sc_ram != NULL)
-        delete sc_ram;
+        free(sc_ram);
     
-    sc_ram = new int[100];
+    sc_ram = malloc(100 * sizeof(sc_ram));
 
     return 0;
 }
@@ -22,8 +22,8 @@ int sc_memorySet(int address, int value)
     }
     else
     {
-        cout << "Неверный адрес ячейки" << endl;
-        err_flag = err_flag | M;
+        printf("Invalid cell address\n");
+        err_flags = err_flags | M;
         return 1;
     }
 }
@@ -37,8 +37,8 @@ int sc_memoryGet (int address, int * value)
     }
     else
     {
-        cout << "Неверный адрес ячейки" << endl;
-        err_flag = err_flag | M;
+        printf("Invalid cell address\n");
+        err_flags = err_flags | M;
         return 1;
     }
 }
@@ -47,12 +47,12 @@ int sc_memorySave (FILE * filename)
 {
     if(fwrite(sc_ram, sizeof(int), 100, filename) != 100)
     {
-        cout << "Не удалось записать ram в память" << endl;
+        printf("Failed to save\n");
         return -1;
     }    
     else
     {
-        cout << "Запись успешна" << endl;
+        printf("Save successfully\n");
         fseek(filename, 0, SEEK_SET);
         return 0;
     }
@@ -63,12 +63,12 @@ int sc_memoryLoad (FILE * filename)
 {
     if(fread(sc_ram, sizeof(int), 100, filename) != 100)
     {
-        cout << "Не удалось загрузить ram из памяти" << endl;
+        printf("Failed to load\n");
         return -1;
     }    
     else
     {
-        cout << "Загрузка успешна" << endl;
+        printf("Upload Successful\n");
         fseek(filename, 0, SEEK_SET);
         return 0;
     }
@@ -77,7 +77,7 @@ int sc_memoryLoad (FILE * filename)
 
 int sc_regInit ()
 {
-    err_flag = 0;
+    err_flags = 0;
     return 0;
 }
 
@@ -87,12 +87,12 @@ int sc_regSet (int reg, int value)
     {
         if(value == 1)
         {
-            err_flag = err_flag | reg;
+            err_flags = err_flags | reg;
             return 0;
         }
         else    
         {
-            err_flag = err_flag & ~reg;
+            err_flags = err_flags & ~reg;
             return 0;
         }
     }
@@ -106,22 +106,22 @@ int sc_regGet (int reg, int *value)
 	}
 
 	if (reg == P)
-		*value = err_flag & P;
+		*value = err_flags & P;
 
 	else if (reg == O)
-		*value = err_flag & O;
+		*value = err_flags & O;
 
 	else if (reg == M)
-		*value = err_flag & M;
+		*value = err_flags & M;
 
 	else if (reg == T)
-		*value = err_flag & T;
+		*value = err_flags & T;
 
 	else if (reg == E)
-		*value = err_flag & E;
+		*value = err_flags & E;
 
     else if (reg == H)
-		*value = err_flag & H;
+		*value = err_flags & H;
         
 	else
 		return 1;
@@ -158,7 +158,6 @@ int sc_commandDecode (int value, int * command, int * operand)
 		return 1;
 	}
 
-	*command = value >> 7;
 	if ((*command > 0 && *command < 10) ||
 		(*command > 11 && *command < 20) ||
 		(*command > 21 && *command < 30) ||
@@ -169,14 +168,15 @@ int sc_commandDecode (int value, int * command, int * operand)
 		return 1;
 	}
 
-	*operand = value & 0b1111111;
+    *command = value >> 7;
+	*operand = value & 0x7F;
 
 	return 0;
 }
 
 void print_arr()
 {
-    for(int i = 0; i < 100; i++)
-        cout << sc_ram[i] << " ";
-    cout << endl;
+    for (int i = 0; i < 100; i++)
+        printf("%d ", sc_ram[i]);
+    printf("\n");
 }
