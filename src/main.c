@@ -3,7 +3,7 @@
 
 int main()
 {
-    int value = 0, a;
+    int value = 0, a, rows, cols;
     
     FILE *ram = fopen("ram.dat", "w+b");
     if (ram == NULL)
@@ -22,10 +22,16 @@ int main()
     mt_setfgcolor(green);
     mt_setbgcolor (white);
     printf("ИВ-022");
+    mt_setbgcolor (black);
+
 
     mt_gotoXY (10, 1);
     mt_setfgcolor(white);
     mt_setbgcolor (black);
+
+    mt_getscreensize (&rows, &cols);
+
+    printf("%d %d\n", rows, cols);
 
     // sc_memoryInit ();
 

@@ -14,16 +14,16 @@ int mt_gotoXY (int x, int y)
 
 int mt_getscreensize (int * rows, int * cols)
 {
-    // struct winsize ws;
+    struct winsize ws;
 
-	// if (ioctl(1, TIOCGWINSZ, &ws)) {
-	// 	return 1;
-	// } else {
-	// 	*rows = ws.ws_row;
-	// 	*cols = ws.ws_col;
-	// }
+	if (ioctl(1, TIOCGWINSZ, &ws)) {
+		return 1;
+	} else {
+		*rows = ws.ws_row;
+		*cols = ws.ws_col;
+	}
 
-	// return 0;
+	return 0;
 }
 
 int mt_setfgcolor (enum colors color)
