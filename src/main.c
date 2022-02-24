@@ -3,7 +3,8 @@
 
 int main()
 {
-    int value = 0, a, rows, cols;
+    // int value = 0, a, rows, cols;
+    char string[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', '\n'};
     
     FILE *ram = fopen("ram.dat", "w+b");
     if (ram == NULL)
@@ -12,26 +13,28 @@ int main()
         return 1;
     }
 
-    mt_clrscr();
+    bc_printA (string);
 
-    mt_gotoXY (5, 10);
-    mt_setfgcolor(red);
-    printf("Машкалев Роман");
+    // mt_clrscr();
 
-    mt_gotoXY (6, 8);
-    mt_setfgcolor(green);
-    mt_setbgcolor (white);
-    printf("ИВ-022");
-    mt_setbgcolor (black);
+    // mt_gotoXY (5, 10);
+    // mt_setfgcolor(red);
+    // printf("Машкалев Роман");
+
+    // mt_gotoXY (6, 8);
+    // mt_setfgcolor(green);
+    // mt_setbgcolor (white);
+    // printf("ИВ-022");
+    // mt_setbgcolor (black);
 
 
-    mt_gotoXY (10, 1);
-    mt_setfgcolor(white);
-    mt_setbgcolor (black);
+    // mt_gotoXY (10, 1);
+    // mt_setfgcolor(white);
+    // mt_setbgcolor (black);
 
-    mt_getscreensize (&rows, &cols);
+    // mt_getscreensize (&rows, &cols);
 
-    printf("%d %d\n", rows, cols);
+    // printf("%d %d\n", rows, cols);
 
     // sc_memoryInit ();
 
@@ -50,6 +53,7 @@ int main()
     // sc_memoryLoad (ram);
 
     // print_arr();
+
 
     return 0;
 }
