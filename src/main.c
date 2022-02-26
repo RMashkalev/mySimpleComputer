@@ -3,8 +3,9 @@
 
 int main()
 {
-    // int value = 0, a, rows, cols;
-    char string[10] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', '\n'};
+    int value = 0, a, rows, cols;
+    char string[28] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
+    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '\n'};
     
     FILE *ram = fopen("ram.dat", "w+b");
     if (ram == NULL)
@@ -18,7 +19,7 @@ int main()
     // mt_clrscr();
 
     // mt_gotoXY (5, 10);
-    // mt_setfgcolor(red);
+    // mt_setfgcolor(yellow);
     // printf("Машкалев Роман");
 
     // mt_gotoXY (6, 8);
