@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "terminal.h"
 
 #define bc_cornerUpLeft 'l'
@@ -30,6 +31,8 @@ static int bcE[2] = {4278387711, 4278387459};
 static int bcF[2] = {50529279, 50529151};
 static int bcp[2] = {4279769112, 404232447}; // +
 static int bcm[2] = {4278190080, 255};       // -
+static int* bcAll[16] = {bc0, bc1, bc2, bc3, bc4, bc5, bc6, bc7, bc8, bc9, bcA, bcB, bcC, bcD, bcE, bcF};
+
 
 int bc_printA (char * str);
 
@@ -41,6 +44,6 @@ int bc_setbigcharpos(int *big, int x, int y, int value);
 
 int bc_getbigcharpos(int *big, int x, int y, int *value);
 
-int bc_bigcharwrite(int fd, int *big, int count, FILE *stream);
+int bc_bigcharwrite(int fd, int* big, int count);
 
-int bc_bigcharread(int fd, int *big, int need_count, int *count, FILE *stream);
+int bc_bigcharread(int fd, int* big, int need_count, int* count);

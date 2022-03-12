@@ -155,44 +155,38 @@ int bc_getbigcharpos(int *big, int x, int y, int *value)
 	return 0;
 }
 
-int bc_bigcharwrite(int fd, int *big, int count, FILE *stream)
+int bc_bigcharwrite(int fd, int* big, int count)
 {
-	if (!big || count < 0 || fd < 0) {
-		return 1;
+	if (count < 0 || fd < 0) {
+		return -1;
 	}
 
 	for (; count > 0; count--) {
-		if (fwrite(&fd, big[0], sizeof(int), stream) < 0) {
-			return 1;
+		if (write(fd, &big[0], sizeof(int)) < 0) {
+			return -1;
 		}
-
-		if (fwrite(&fd, big[1], sizeof(int), stream) < 0) {
-			return 1;
+		if (write(fd, &big[1], sizeof(int)) < 0) {
+			return -1;
 		}
 	}
-
-
 	return 0;
 }
 
-int bc_bigcharread(int fd, int *big, int need_count, int *count, FILE *stream)
+int bc_bigcharread(int fd, int* big, int need_count, int* count)
 {
-	if (!big || !count || fd < 0) {
-		return 1;
+	if (!count || fd < 0) {
+		return -1;
 	}
 
 	for (; need_count > 0; need_count--) {
-		if (fread(&fd, big[0], sizeof(int), stream) < 0) {
+		if (read(fd, &big[0], sizeof(int)) < 0) {
 			*count = 0;
-			return 1;
+			return -1;
 		}
-
-		if (fread(&fd, big[1], sizeof(int), stream) < 0) {
+		if (read(fd, &big[1], sizeof(int)) < 0) {
 			*count = 0;
-			return 1;
+			return -1;
 		}
 	}
-
-
 	return 0;
 }

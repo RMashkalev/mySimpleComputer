@@ -1,12 +1,16 @@
 #include "memory.h"
 #include "terminal.h"
 #include "myBigChars.h"
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 int main()
 {
-    int value = 0, a, rows, cols;
+    int value = 0, a, rows, cols, bc;
     char string[28] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
     'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '\n'};
+    
     
     FILE *ram = fopen("ram.dat", "w+b");
     if (ram == NULL)
@@ -14,13 +18,21 @@ int main()
         printf("Ошибка открытия файла");
         return 1;
     }
+
+    if((bc = open("bc.txt", O_WRONLY)) == -1)
+    {
+        printf("Chlen\n");
+        return -1;
+    }
+
     mt_clrscr();
     bc_printA (string);
     printf("\n");
     bc_box(1, 2, 10, 11);
     bc_printbigchar(bc8, 12, 2, black, white);
     printf("\n\n");
-    
+    bc_bigcharwrite(bc, bcAll[16], 5);
+
 
     // mt_clrscr();
 
