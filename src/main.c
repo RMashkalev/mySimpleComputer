@@ -1,6 +1,6 @@
 #include "memory.h"
 #include "terminal.h"
-#include "myBigChars.h"
+#include "BigChar.h"
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -31,7 +31,6 @@ int main()
     bc_box(1, 2, 10, 11);
     bc_printbigchar(bc8, 12, 2, black, white);
     printf("\n\n");
-    bc_bigcharwrite(bc, bcAll[16], 5);
 
 
     // mt_clrscr();
